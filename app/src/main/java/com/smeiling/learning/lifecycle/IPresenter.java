@@ -10,7 +10,7 @@ import com.smeiling.learning.Logg;
 /**
  * @Author: Smeiling
  * @Date: 2019-02-20 10-56
- * @Description:
+ * @Description: 注解方式对生命周期进行监听
  */
 public interface IPresenter extends LifecycleObserver {
 

@@ -30,7 +30,11 @@
         <activity android:name=".dashline.DashLineActivity" />
         <activity android:name=".rxjava.RxJavaActivity" />
         <activity android:name=".eventbus.EventBusActivity" />
-        <activity android:name=".lifecycle.ObservableActivity"></activity>
+        <activity android:name=".lifecycle.ObservableActivity" />
+        <activity android:name=".lifecycle.DefaultLifecycleActivity" />
+        <activity android:name=".livedata.LiveDataActivity" />
+        <activity android:name=".livedata.DupLiveDataActivity" />
+        <activity android:name=".livedata.LiveDataFragmentActivity"></activity>
     </application>
 
 </manifest>
