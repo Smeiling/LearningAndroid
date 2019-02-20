@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smeiling.learning">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".glide.SmlApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".glide.activity.GlideTestActivity" />
+        <activity android:name=".LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".butterknife.ButterKnifeActivity" />
+        <activity android:name=".retrofit.activity.RetrofitActivity" />
+        <activity android:name=".okhttp.OkHttpActivity" />
+        <activity android:name=".drawable_md5.DrawableHashActivity" />
+        <activity android:name=".sparse_array.SparseArrayActivity" />
+        <activity android:name=".dashline.DashLineActivity" />
+        <activity android:name=".rxjava.RxJavaActivity" />
+        <activity android:name=".eventbus.EventBusActivity" />
+        <activity android:name=".lifecycle.ObservableActivity"></activity>
+    </application>
+
+</manifest>
