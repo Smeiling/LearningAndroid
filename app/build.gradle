@@ -65,3 +65,39 @@ dependencies {
     implementation 'android.arch.lifecycle:common-java8:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 }
+
+task hook {
+    beforeEvaluate {
+        println 'hook beforeEvaluate'
+    }
+    afterEvaluate {
+        println 'hook afterEvaluate'
+    }
+    gradle.taskGraph.whenReady {
+        println 'gradle.taskGraph.whenReady'
+    }
+    gradle.beforeProject {
+        println 'gradle.beforeProject'
+    }
+    gradle.buildFinished {
+        println 'gradle.buildFinished'
+    }
+}
+
+//task assDHook {
+//    afterEvaluate {
+//        tasks.findByName("assembleDebug").doFirst {
+//            println 'hook afterEvaluate from assHook'
+//        }
+//    }
+//}
+
+//task badHook {
+//    afterEvaluate {
+//        tasks.findByName("packageDebug").doFirst {
+//            println 'hook afterEvaluate from BadHook'
+//        }
+//
+//    }
+//}
+

@@ -34,7 +34,8 @@
         <activity android:name=".lifecycle.DefaultLifecycleActivity" />
         <activity android:name=".livedata.LiveDataActivity" />
         <activity android:name=".livedata.DupLiveDataActivity" />
-        <activity android:name=".livedata.LiveDataFragmentActivity"></activity>
+        <activity android:name=".livedata.LiveDataFragmentActivity" />
+        <activity android:name=".proxy.DynamicProxyActivity"></activity>
     </application>
 
 </manifest>
