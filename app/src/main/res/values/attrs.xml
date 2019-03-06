@@ -6,4 +6,8 @@
         <attr name="hv_border_width" format="dimension" />
         <attr name="hv_border_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="RatioLinearLayout">
+        <attr name="rll_ratio" format="float" />
+    </declare-styleable>
 </resources>

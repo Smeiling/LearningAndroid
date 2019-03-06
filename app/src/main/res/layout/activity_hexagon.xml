@@ -1,26 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.smeiling.learning.squarelayout.RatioLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     android:gravity="center"
+    android:padding="10dp"
+    app:rll_ratio="1"
     tools:context=".hexagon.HexagonActivity">
 
-    <com.smeiling.learning.hexagon.HexagonView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="visible"
-        app:hv_border_color="@android:color/white"
-        app:hv_border_width="2dp"
-        app:hv_corner_radius="10dp" />
+    <!--<com.smeiling.learning.hexagon.HexagonView-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:src="@mipmap/ic_launcher"-->
+    <!--android:visibility="visible"-->
+    <!--app:hv_border_color="@android:color/white"-->
+    <!--app:hv_border_width="2dp"-->
+    <!--app:hv_corner_radius="10dp" />-->
 
-    <View
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@drawable/gradient_line" />-->
+
+    <com.smeiling.learning.squarelayout.RatioLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/gradient_line" />
+        android:layout_height="match_parent"
+        android:background="#32399f"
+        app:rll_ratio="0.86">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#123456" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.smeiling.learning.squarelayout.RatioLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:rll_ratio="1">
+
+                </com.smeiling.learning.squarelayout.RatioLinearLayout>
+
+                <com.smeiling.learning.squarelayout.RatioLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#3399ff"
+                    app:rll_ratio="1">
+
+                </com.smeiling.learning.squarelayout.RatioLinearLayout>
+
+                <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#126456" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#120956" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.smeiling.learning.squarelayout.RatioLinearLayout>
+
+</com.smeiling.learning.squarelayout.RatioLinearLayout>
