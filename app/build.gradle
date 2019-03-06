@@ -66,23 +66,23 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 }
 
-task hook {
-    beforeEvaluate {
-        println 'hook beforeEvaluate'
-    }
-    afterEvaluate {
-        println 'hook afterEvaluate'
-    }
-    gradle.taskGraph.whenReady {
-        println 'gradle.taskGraph.whenReady'
-    }
-    gradle.beforeProject {
-        println 'gradle.beforeProject'
-    }
-    gradle.buildFinished {
-        println 'gradle.buildFinished'
-    }
-}
+//task hook {
+//    beforeEvaluate {
+//        println 'hook beforeEvaluate'
+//    }
+//    afterEvaluate {
+//        println 'hook afterEvaluate'
+//    }
+//    gradle.taskGraph.whenReady {
+//        println 'gradle.taskGraph.whenReady'
+//    }
+//    gradle.beforeProject {
+//        println 'gradle.beforeProject'
+//    }
+//    gradle.buildFinished {
+//        println 'gradle.buildFinished'
+//    }
+//}
 
 //task assDHook {
 //    afterEvaluate {
@@ -101,3 +101,11 @@ task hook {
 //    }
 //}
 
+
+task adbInstall {
+    afterEvaluate {
+        tasks.findByName("assembleDebug").doFirst {
+            "adb install -r app/build/outputs/apk/debug/app-debug.apk".execute()
+        }
+    }
+}

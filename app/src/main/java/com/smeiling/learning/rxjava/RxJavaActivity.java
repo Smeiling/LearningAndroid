@@ -17,6 +17,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
@@ -43,27 +44,29 @@ public class RxJavaActivity extends AppCompatActivity {
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 emitter.onNext("Observable Create");
             }
-        }).subscribe(new Observer<Object>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(Object o) {
-                Logg.error(o.toString());
-            }
+                    @Override
+                    public void onNext(Object o) {
+                        Logg.error(o.toString());
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-            }
-        });
+                    }
+                });
     }
 
     private void funcAssemblyHook() {

@@ -35,7 +35,9 @@
         <activity android:name=".livedata.LiveDataActivity" />
         <activity android:name=".livedata.DupLiveDataActivity" />
         <activity android:name=".livedata.LiveDataFragmentActivity" />
-        <activity android:name=".proxy.DynamicProxyActivity"></activity>
+        <activity android:name=".proxy.DynamicProxyActivity" />
+        <activity android:name=".thread.ThreadDemoActivity" />
+        <activity android:name=".hexagon.HexagonActivity"></activity>
     </application>
 
 </manifest>
