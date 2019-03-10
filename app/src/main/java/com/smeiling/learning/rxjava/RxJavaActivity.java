@@ -32,7 +32,7 @@ public class RxJavaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java);
 
-        funcAssemblyHook();
+        //funcAssemblyHook();
         funcCreate();
 //        funcGroupJoin();
 
@@ -43,6 +43,11 @@ public class RxJavaActivity extends AppCompatActivity {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 emitter.onNext("Observable Create");
+            }
+        }).map(new Function<Object, Object>() {
+            @Override
+            public Object apply(Object o) throws Exception {
+                return o + "sml";
             }
         }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
