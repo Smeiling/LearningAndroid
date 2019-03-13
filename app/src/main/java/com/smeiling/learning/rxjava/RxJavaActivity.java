@@ -1,6 +1,8 @@
 package com.smeiling.learning.rxjava;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -8,15 +10,16 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.smeiling.learning.Logg;
 import com.smeiling.learning.R;
 
-import org.reactivestreams.Subscriber;
-
 import java.util.concurrent.TimeUnit;
+
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
@@ -32,16 +35,22 @@ public class RxJavaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java);
 
-        //funcAssemblyHook();
-        funcCreate();
+//        funcAssemblyHook();
+//        funcCreate();
 //        funcGroupJoin();
 
+        funcCompose();
     }
 
+    /**
+     * 基本操作符
+     * 装饰者模式
+     */
     private void funcCreate() {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                Logg.error("CurrentThread = " + Thread.currentThread().getName());
                 emitter.onNext("Observable Create");
             }
         }).map(new Function<Object, Object>() {
@@ -50,6 +59,7 @@ public class RxJavaActivity extends AppCompatActivity {
                 return o + "sml";
             }
         }).subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Object>() {
                     @Override
@@ -72,8 +82,18 @@ public class RxJavaActivity extends AppCompatActivity {
 
                     }
                 });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Handler handler = new Handler(Looper.getMainLooper());
+            }
+        });
     }
 
+    /**
+     * RxJavaPlugin的Hook功能
+     */
     private void funcAssemblyHook() {
         RxJavaPlugins.setOnObservableAssembly(new Function<Observable, Observable>() {
             @Override
@@ -84,6 +104,9 @@ public class RxJavaActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 操作符
+     */
     private void funcGroupJoin() {
 
         //产生字母的序列,周期为1000ms
@@ -174,5 +197,105 @@ public class RxJavaActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    /**
+     * Compose操作符
+     */
+    private void funcCompose() {
+        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            emitter.onNext("subscribe thread = " + Thread.currentThread().getName());
+            emitter.onComplete();
+        }).compose(new SchedulerTransformer<>())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Logg.debug("onNext thread = " + Thread.currentThread().getName() + ", s = " + s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        Observable.create((ObservableOnSubscribe<Long>) emitter -> {
+            emitter.onNext(System.currentTimeMillis());
+            emitter.onComplete();
+        }).compose(new SchedulerTransformer<>())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        Logg.debug("onNext thread = " + Thread.currentThread().getName() + ", value = " + aLong);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        transform(Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(23);
+                emitter.onComplete();
+            }
+        })).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Logg.debug("onNext thread = " + Thread.currentThread().getName() + ", value = " + integer);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
+
+    public <T> Observable<T> transform(Observable<T> upstream) {
+        return upstream.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public class SchedulerTransformer<T> implements ObservableTransformer<T, T> {
+
+        @Override
+        public ObservableSource<T> apply(Observable<T> upstream) {
+            return upstream.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread());
+        }
     }
 }

@@ -9,9 +9,9 @@
     <EditText
         android:id="@+id/et_router_path"
         android:layout_width="match_parent"
-        android:text="hexagon"
         android:layout_height="wrap_content"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="rxjava" />
 
     <Button
         android:id="@+id/btn_redirect"

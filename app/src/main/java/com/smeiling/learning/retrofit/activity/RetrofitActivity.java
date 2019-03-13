@@ -37,34 +37,34 @@ public class RetrofitActivity extends AppCompatActivity {
     @OnClick(R.id.btn_redirect)
     public void onRedirectClick(View view) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://bjtime.cn/")
+                .baseUrl("http://github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         GitHubService service = retrofit.create(GitHubService.class);
-//        Call<List<Object>> repos = service.listRepos("octocat");
-//        repos.enqueue(new Callback<List<Object>>() {
-//            @Override
-//            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
-//                Log.d(RetrofitActivity.class.getSimpleName(), response.toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Object>> call, Throwable t) {
-//                Log.e(RetrofitActivity.class.getSimpleName(), t.getMessage());
-//            }
-//        });
-        Call<Object> time = service.getTime("http://bjtime.cn");
-        time.enqueue(new Callback<Object>() {
+        Call<List<Object>> repos = service.listRepos("octocat");
+        repos.enqueue(new Callback<List<Object>>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                Log.d(RetrofitActivity.class.getSimpleName(), "response = " + response.toString());
+            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+                Log.d(RetrofitActivity.class.getSimpleName(), response.toString() + " Thread = " + Thread.currentThread().getName());
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-                Log.d(RetrofitActivity.class.getSimpleName(), "t = " + t.getMessage());
+            public void onFailure(Call<List<Object>> call, Throwable t) {
+                Log.e(RetrofitActivity.class.getSimpleName(), t.getMessage());
             }
         });
+//        Call<Object> time = service.getTime("http://bjtime.cn");
+//        time.enqueue(new Callback<Object>() {
+//            @Override
+//            public void onResponse(Call<Object> call, Response<Object> response) {
+//                Log.d(RetrofitActivity.class.getSimpleName(), "response = " + response.toString() + " Thread = " + Thread.currentThread().getName());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Object> call, Throwable t) {
+//                Log.d(RetrofitActivity.class.getSimpleName(), "t = " + t.getMessage());
+//            }
+//        });
 
     }
 }
