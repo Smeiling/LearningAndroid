@@ -12,18 +12,17 @@ import com.smeiling.learning.R;
 
 import java.util.concurrent.TimeUnit;
 
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
@@ -36,10 +35,10 @@ public class RxJavaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rx_java);
 
 //        funcAssemblyHook();
-//        funcCreate();
+        funcCreate();
 //        funcGroupJoin();
 
-        funcCompose();
+//        funcCompose();
     }
 
     /**
@@ -52,11 +51,22 @@ public class RxJavaActivity extends AppCompatActivity {
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 Logg.error("CurrentThread = " + Thread.currentThread().getName());
                 emitter.onNext("Observable Create");
+                emitter.onNext(123);
             }
         }).map(new Function<Object, Object>() {
             @Override
             public Object apply(Object o) throws Exception {
                 return o + "sml";
+            }
+        }).filter(new Predicate<Object>() {
+            @Override
+            public boolean test(Object o) throws Exception {
+                Logg.error("test = " + o);
+                if (((String) o).contains("123")) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         }).subscribeOn(Schedulers.newThread())
                 .subscribeOn(Schedulers.io())
@@ -83,12 +93,6 @@ public class RxJavaActivity extends AppCompatActivity {
                     }
                 });
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Handler handler = new Handler(Looper.getMainLooper());
-            }
-        });
     }
 
     /**

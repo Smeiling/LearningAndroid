@@ -38,6 +38,7 @@
         <activity android:name=".proxy.DynamicProxyActivity" />
         <activity android:name=".thread.ThreadDemoActivity" />
         <activity android:name=".hexagon.HexagonActivity" />
+        <activity android:name=".rxjava.subject.SubjectActivity"></activity>
     </application>
 
 </manifest>
