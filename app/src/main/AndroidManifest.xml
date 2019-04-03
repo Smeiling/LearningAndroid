@@ -38,7 +38,14 @@
         <activity android:name=".proxy.DynamicProxyActivity" />
         <activity android:name=".thread.ThreadDemoActivity" />
         <activity android:name=".hexagon.HexagonActivity" />
-        <activity android:name=".rxjava.subject.SubjectActivity"></activity>
+        <activity android:name=".rxjava.subject.SubjectActivity" />
+
+        <service
+            android:name=".ipc.BookManagerService"
+            android:exported="true"
+            android:process=":sml" />
+
+        <activity android:name=".ipc.AIDLActivity"></activity>
     </application>
 
 </manifest>
