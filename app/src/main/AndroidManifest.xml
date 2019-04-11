@@ -45,7 +45,8 @@
             android:exported="true"
             android:process=":sml" />
 
-        <activity android:name=".ipc.AIDLActivity"></activity>
+        <activity android:name=".ipc.AIDLActivity" />
+        <activity android:name=".draglayout.DragLayoutActivity"></activity>
     </application>
 
 </manifest>

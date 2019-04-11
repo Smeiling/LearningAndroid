@@ -36,6 +36,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/shape_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -46,6 +47,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
+                <com.smeiling.learning.hexagon.HexagonView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/ic_launcher"
+                    android:visibility="visible"
+                    app:hv_border_color="@android:color/transparent"
+                    app:hv_border_width="0dp"
+                    app:hv_corner_radius="4dp" />
 
                 <com.smeiling.learning.squarelayout.RatioLinearLayout
                     android:layout_width="wrap_content"

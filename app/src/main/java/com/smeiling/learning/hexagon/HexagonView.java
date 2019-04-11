@@ -134,22 +134,42 @@ public class HexagonView extends ImageView {
 
         startAngle = 0;
 
+//        float[] coordinateSets = {
+//                viewWidth - (w - w * cos()) - cornerRadius, (3 * w - (cornerRadius / cos())) / 2,
+//
+//                w, viewWidth - (cornerRadius / cos()),
+//
+//                w - w * cos() + cornerRadius, (3 * w - (cornerRadius / cos())) / 2,
+//
+//                w - w * cos() + cornerRadius, (w + (cornerRadius / cos())) / 2,
+//
+//                w, (cornerRadius / cos()),
+//
+//                2 * w - (w - w * cos()) - cornerRadius, (w + (cornerRadius / cos())) / 2
+//        };
+
+//        path.addArc(createRectF(coordinateSets[0], coordinateSets[1]), startAngle, perAngle);
+//        for (int i = 2; i < 12; i += 2) {
+//            startAngle += perAngle;
+//            path.arcTo(createRectF(coordinateSets[i], coordinateSets[i + 1]), startAngle, perAngle);
+//        }
+
+        RectF rectF = new RectF(horizontalOffset + padding + w - w * cos() + borderWidth / 2,
+                0,
+                horizontalOffset + padding + viewWidth - (w - w * cos()) - borderWidth / 2,
+                (3 * w - (cornerRadius / cos())) / 2 - 20);
+        path.addRect(rectF, Path.Direction.CW);
+
         float[] coordinateSets = {
-                viewWidth - (w - w * cos()) - cornerRadius, (3 * w - (cornerRadius / cos())) / 2,
+                viewWidth - (w - w * cos()) - cornerRadius, (3 * w - (cornerRadius / cos())) / 2 - 20,
 
-                w, viewWidth - (cornerRadius / cos()),
+                w, viewWidth - (cornerRadius / cos()) - 30,
 
-                w - w * cos() + cornerRadius, (3 * w - (cornerRadius / cos())) / 2,
-
-                w - w * cos() + cornerRadius, (w + (cornerRadius / cos())) / 2,
-
-                w, (cornerRadius / cos()),
-
-                2 * w - (w - w * cos()) - cornerRadius, (w + (cornerRadius / cos())) / 2
+                w - w * cos() + cornerRadius, (3 * w - (cornerRadius / cos())) / 2 - 20
         };
 
         path.addArc(createRectF(coordinateSets[0], coordinateSets[1]), startAngle, perAngle);
-        for (int i = 2; i < 12; i += 2) {
+        for (int i = 2; i < 6; i += 2) {
             startAngle += perAngle;
             path.arcTo(createRectF(coordinateSets[i], coordinateSets[i + 1]), startAngle, perAngle);
         }
